@@ -8,28 +8,23 @@
 
 import XCTest
 
+ import SimpleDomainModel
+
 class MathTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testAdd() {
+        let m1 = Money(amount: 15.0, currency: "USD")
+        let m2 = Money(amount: 10.0, currency: "USD")
+        let m3: Money = m1 + m2
+        XCTAssert(m3.amount == 25)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testSub() {
+        let m1 = Money(amount: 15.0, currency: "USD")
+        let m2 = Money(amount: 10.0, currency: "USD")
+        let m3: Money = m1 - m2
+        XCTAssert(m3.amount == 5)
     }
     
 }
+	

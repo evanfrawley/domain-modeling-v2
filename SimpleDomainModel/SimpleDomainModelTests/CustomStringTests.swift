@@ -8,30 +8,38 @@
 
 import XCTest
 
+
+ import SimpleDomainModel
+
+
 class CustomStringTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+    func testMoney() {
+        let mon = Money(amount: 15.0, currency: "USD")
+        print(mon.description)
+        XCTAssert(mon.description == "USD15.0")
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testPerson() {
+        let person = Person(firstName: "Evan", lastName: "Frawley", age: 20)
+        
+        XCTAssert(person.description == "This person's name is Evan Frawley who is 20 years old")
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testJob() {
+        let job = Job(title: "SDE", type: Job.JobType.Hourly(50))
+        print(job.description)
+        XCTAssert(job.description == "This job is SDE with pay type Hourly(50.0) and yearly pay is 100000")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testFamily() {
+        let person1 = Person(firstName: "Evan", lastName: "F", age: 25)
+        let person2 = Person(firstName: "Maggie", lastName: "T", age: 25)
+        let fam = Family(spouse1: person1, spouse2: person2)
+        print(fam.description)
+        XCTAssert(fam.description == "This family consists of Evan F and Maggie T  with total income being 0")
     }
-    
-    
+    	
     
 }

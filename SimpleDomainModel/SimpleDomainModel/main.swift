@@ -26,19 +26,31 @@ protocol CustomStringConvertible {
 }
 
 protocol Mathematics {
-    func + (left: Money, right: Money) -> Money
-    func - (left: Money, right: Money) -> Money
+    static func + (left: Money, right: Money) -> Money
+    static func - (left: Money, right: Money) -> Money
 }
 
 extension Double {
-    
+    var USD: Money {return Money(amount: self, currency: "USD")}
+    var EUR: Money {return Money(amount: self, currency: "EUR")}
+    var GBP: Money {return Money(amount: self, currency: "GBP")}
+    var CAN: Money {return Money(amount: self, currency: "CAN")}
 }
 
 ////////////////////////////////////
 // Money
 //
-public struct Money : CustomStringConvertible {
-    public var amount : Int
+
+func + (left: Money, right: Money) -> Money {
+    return left.add(right)
+}
+
+func - (left: Money, right: Money) -> Money {
+    return left.subtract(right)
+}
+
+public struct Money: CustomStringConvertible {
+    public var amount : Double
     public var currency : String
     public var description: String {
         get {
@@ -51,6 +63,7 @@ public struct Money : CustomStringConvertible {
         "CAN": 1.25
     ]
     
+
     public func convert(to: String) -> Money {
         var mult : Double = 0
         if currency.self == "USD" {
@@ -59,11 +72,13 @@ public struct Money : CustomStringConvertible {
             mult = 1 / conversions[currency]!
         
         }
-        let newAmt : Int = Int(Double(amount.self) * mult)
+        let newAmt : Double = Double(amount.self * mult)
         let ret = Money(amount: newAmt, currency: to)
         
         return ret
     }
+    
+
   
     public func add(to: Money) -> Money {
         var copy = Money(amount: 0, currency: "USD")
@@ -77,6 +92,7 @@ public struct Money : CustomStringConvertible {
         return ret
         
     }
+    
     
     public func subtract(from: Money) -> Money {
         var copy = Money(amount: 0, currency: "USD")

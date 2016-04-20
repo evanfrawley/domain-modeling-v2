@@ -8,28 +8,31 @@
 
 import XCTest
 
+ import SimpleDomainModel
+
 class ExtensionTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    //make monies into USD, EUR, CAN, GBP, and then do some shit with them
+    func testUSD() {
+        let val = 15.0
+        let money = val.USD
+        XCTAssert(money.currency == "USD")
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testEUR() {
+        let val = 15.0
+        let money = val.EUR
+        XCTAssert(money.currency == "EUR")
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGBP() {
+        let val = 15.0
+        let money = val.GBP
+        XCTAssert(money.currency == "GBP")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testCAN() {
+        let val = 15.0
+        let money = val.CAN
+        XCTAssert(money.currency == "CAN")
     }
-    
 }
