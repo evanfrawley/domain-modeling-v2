@@ -26,8 +26,8 @@ protocol CustomStringConvertible {
 }
 
 protocol Mathematics {
-    static func + (left: Money, right: Money) -> Money
-    static func - (left: Money, right: Money) -> Money
+    func add(to: Money) -> Money
+    func subtract(from: Money) -> Money
 }
 
 extension Double {
@@ -49,7 +49,7 @@ func - (left: Money, right: Money) -> Money {
     return left.subtract(right)
 }
 
-public struct Money: CustomStringConvertible {
+public struct Money: CustomStringConvertible, Mathematics {
     public var amount : Double
     public var currency : String
     public var description: String {
@@ -78,8 +78,6 @@ public struct Money: CustomStringConvertible {
         return ret
     }
     
-
-  
     public func add(to: Money) -> Money {
         var copy = Money(amount: 0, currency: "USD")
         if currency.self == to.currency {
@@ -92,7 +90,6 @@ public struct Money: CustomStringConvertible {
         return ret
         
     }
-    
     
     public func subtract(from: Money) -> Money {
         var copy = Money(amount: 0, currency: "USD")
